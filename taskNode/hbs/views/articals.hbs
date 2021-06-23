@@ -1,0 +1,22 @@
+{{>header}}
+{{>nav}}
+<section class="container my-4">
+    <form>
+    <input type="hidden" name="id" value="{{id}}">
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Title</label>
+        <input type="text" name="title" value="{{title}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    </div>
+    <div class="form-floating">
+        <textarea class="form-control" name="content" value="{{content}}" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>       
+        <label for="floatingTextarea2">Content</label>
+
+    </div>
+    <div class="mb-3 form-check">
+        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+        <label class="form-check-label" for="exampleCheck1">Status</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</section>
+{{>footer}}

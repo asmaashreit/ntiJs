@@ -1,0 +1,29 @@
+{{header}}
+
+<section class="container my-3">
+<table class="table">
+    <thead>
+        <th>Amount</th>
+        <th>date</th>
+        <th>Location</th>
+        <th>actions</th>
+    </thead>
+    <tbody>
+        {{#each operation}}
+        <tr>
+            <td>{{this.name}}</td>
+            <td>{{this.date}}</td>
+            <td>{{this.location}}</td>
+            <td>
+                <a href="/showSingleOp/{{this._id}}" class="">show</a>
+                <a href="/editOp/{{this._id}}" class="btn btn-success">edit</a>
+                <a href="/deleteOperation/{{this._id}}" class="btn btn-danger">delete</a>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+</section>
+
+{{footer}}

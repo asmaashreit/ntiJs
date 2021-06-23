@@ -1,4 +1,4 @@
-const taskHeads = ["id", "title", "content", "taskType", "dueDate", "status", "important"]
+const taskHeads = ["title", "content", "taskType", "dueDate", "status", "important"]
 
 const getTaskData = () => {
     let allTask = JSON.parse(localStorage.getItem('tasks')) || []
@@ -6,6 +6,8 @@ const getTaskData = () => {
 }
 
 const setTaskData = (task) => localStorage.setItem('tasks', JSON.stringify(task))
+
+const addTaskForm = document.querySelector('#addTask')
 
 const createNewElement = (parent, element, classes = false, text = false) => {
     myElement = document.createElement(element)
@@ -19,32 +21,36 @@ tdRowTask = (i, newTaskRow) => {
     let trParent = document.querySelector('#taskData')
     let trTable = createNewElement(trParent, 'tr')
     createNewElement(trTable, 'td', '', i)
-    createNewElement(trTable, 'td', '', newTaskRow.id)
-    createNewElement(trTable, 'td', '', newTaskRow.taskTitle)
-    createNewElement(trTable, 'td', '', newTaskRow.taskContent)
-    createNewElement(trTable, 'td', '', newTaskRow.taskTaskType)
-    createNewElement(trTable, 'td', '', newTaskRow.taskDueDate)
-    createNewElement(trTable, 'td', '', newTaskRow.taskStatus)
-    createNewElement(trTable, 'td', '', newTaskRow.taskImportant)
+        //createNewElement(trTable, 'td', '', newTaskRow.id)
+    createNewElement(trTable, 'td', '', newTaskRow.title)
+    createNewElement(trTable, 'td', '', newTaskRow.content)
+    createNewElement(trTable, 'td', '', newTaskRow.taskType)
+    createNewElement(trTable, 'td', '', newTaskRow.dueDate)
+    createNewElement(trTable, 'td', '', newTaskRow.status)
+    createNewElement(trTable, 'td', '', newTaskRow.important)
     let td = createNewElement(trTable, 'td')
     delbtn = createNewElement(td, 'button', '', "delete")
+    editbtn = createNewElement(td, 'button', '', "edit")
 }
 
-const addTask = (taskId, title, content, taskType, dueDate, status, important) => {
-    let newTask = {
-        id: taskId,
-        taskTitle: title,
-        taskContent: content,
-        taskTaskType: taskType,
-        taskDueDate: dueDate,
-        taskStatus: status,
-        taskImportant: important
-    }
+addTaskForm.addEventListener('submit', function(e) {
+    e.preventDefault()
+    newTask = {}
+    taskHeads.forEach((ele, i) => {
+            newTask[ele] = this.elements[ele].value
+        })
+        //console.log(newTask)
+    addTask(newTask)
 
+})
+
+
+const addTask = (newTask) => {
     alltasks = getTaskData()
     alltasks.push(newTask)
     setTaskData(alltasks)
-        //tdRowTask(newTask.length, newTask)
+
+    //tdRowTask(newTask.length, newTask)
 }
 
 //addTask(9, 8, 7, 6, 5, 4, 3)
@@ -52,7 +58,7 @@ const addTask = (taskId, title, content, taskType, dueDate, status, important) =
 const showTaskData = () => {
     alltasks = getTaskData()
     alltasks.forEach((el, i) => {
-        console.log(`${el.taskTitle} ==> ${el.taskContent} ==> ${el.taskTaskType} ==> ${el.taskDueDate} ==> ${el.taskStatus} ==> ${el.taskImportant}`)
+        console.log(`${el.title} ==> ${el.content} ==> ${el.taskType} ==> ${el.dueDate} ==> ${el.status} ==> ${el.important}`)
         tdRowTask(i + 1, el)
     })
 
